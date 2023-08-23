@@ -1,15 +1,15 @@
-import { BeforeAll, Before, AfterAll, After  } from "@cucumber/cucumber"
-import { chromium, Browser, Page } from "@playwright/test"
+import { BeforeAll, Before, AfterAll, After, Status  } from "@cucumber/cucumber"
+import { chromium, Browser, Page, BrowserContext } from "@playwright/test"
 import { fixture } from "./pageFixture"
 
 let browser: Browser
 let page: Page
+let context: BrowserContext
 
 
 BeforeAll(async function () {
     browser = await chromium.launch({ headless: false })
-    // page = await browser.newPage()
-    // fixture.page = page
+    context = await browser.newContext()
 })
 
 Before(async function () {
@@ -17,11 +17,17 @@ Before(async function () {
     fixture.page = page
 })
 
-After(async function () {
+After(async function ({ pickle, result }) {
+    // Take screen shots
+    if (result?.status === Status.PASSED) {
+        const img = await fixture.page.screenshot({ path: `./test-result/screenshots/${pickle.name}.png`, type: 'png' })
+        await this.attach(img, 'image/png')
+    }
+
     await fixture.page.close()
+    await context.close()
 })
 
 AfterAll(async function () {
-    await page.close()
     await browser.close()
 })

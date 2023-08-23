@@ -4,7 +4,7 @@
             "snippetInterface": "async-await"
         },
         "paths": [
-            "src/test/features/addToCart.feature"
+            "src/test/features/"
         ],
         "publishQuiet": true,
         "dryRun": false,
@@ -14,6 +14,9 @@
         ],
         "requireModule": [
             "ts-node/register"
+        ],
+        "format": [
+            "html:cucumber-report.html"
         ]
     }
 }

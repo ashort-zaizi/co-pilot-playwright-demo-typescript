@@ -8,17 +8,13 @@ import { fixture } from "../../hooks/pageFixture";
 
 Given('user searches for {string}', async function (book) {
     // fixture.logger.info("Searching for a book: " + book)
-    // await fixture.page.locator("input[type='search']").type(book);
-    await fixture.page.waitForTimeout(4000);
-    await fixture.page.locator("input[aria-label='search']").type(book);
-    await fixture.page.waitForTimeout(2000);
+    await fixture.page.locator("input[type='search']").type(book);
+    await fixture.page.waitForTimeout(1000);
     await fixture.page.locator("mat-option[role='option'] span").click();
-    await fixture.page.waitForTimeout(4000);
 });
 
 When('user adds the book to the cart', async function () {
     await fixture.page.locator("button[color='primary']").click();
-    await fixture.page.waitForTimeout(4000);
 });
 
 Then('the cart badge gets updated', async function () {

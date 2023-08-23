@@ -1,5 +1,5 @@
 import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber"
-import { chromium, Page, Browser, expect } from "@playwright/test"
+import { expect } from "@playwright/test"
 import { fixture } from "../../hooks/pageFixture"
 
 
@@ -23,6 +23,8 @@ Given('user enters the password {string}', async function (password) {
 
 When('clicks on the login button', async function () {
     await fixture.page.locator("button[color='primary']").click()
+    // await fixture.page.waitForLoadState()
+    await fixture.page.waitForTimeout(1000)
 });
 
 Then('user is successfully logged in', async function () {
