@@ -7,7 +7,7 @@ import { fixture } from "../../hooks/pageFixture";
 
 
 Given('user searches for {string}', async function (book) {
-    // fixture.logger.info("Searching for a book: " + book)
+    fixture.logger.info("Searching for book: " + book)
     await fixture.page.locator("input[type='search']").type(book);
     await fixture.page.waitForTimeout(1000);
     await fixture.page.locator("mat-option[role='option'] span").click();

@@ -7,6 +7,7 @@ setDefaultTimeout(60 * 1000 * 1) // 1 minutes
 
 Given('user is on the app login page', async function() {
     await fixture.page.goto(process.env.BASEURL)
+    fixture.logger.info(`Navigated to ${process.env.BASEURL}`)
 })
    
 Given('user clicks on the login link', async function () {
@@ -29,7 +30,7 @@ When('clicks on the login button', async function () {
 
 Then('user is successfully logged in', async function () {
     const text = await fixture.page.locator("//button[contains(@class,'mat-focus-indicator mat-menu-trigger')]//span[1]").textContent();
-    console.log(text);
+    fixture.logger.info(`User is logged in as ${text}`)
 });
 
 Then('user is not logged in', async function () {const failureMessage = await fixture.page.locator("//mat-error[@role='alert']");
