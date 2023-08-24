@@ -19,8 +19,8 @@ Before(async function () {
 
 After(async function ({ pickle, result }) {
     // Take screen shots
-    if (result?.status === Status.PASSED) {
-        const img = await fixture.page.screenshot({ path: `./test-result/screenshots/${pickle.name}.png`, type: 'png' })
+    if (result?.status === Status.FAILED) {
+        const img = await fixture.page.screenshot({ path: `./test-results/screenshots/${pickle.name}.png`, type: 'png' })
         await this.attach(img, 'image/png')
     }
 
