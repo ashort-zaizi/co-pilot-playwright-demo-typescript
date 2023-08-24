@@ -6,7 +6,7 @@ import { fixture } from "../../hooks/pageFixture"
 setDefaultTimeout(60 * 1000 * 1) // 1 minutes
 
 Given('user is on the app login page', async function() {
-    await fixture.page.goto('https://bookcart.azurewebsites.net/')
+    await fixture.page.goto(process.env.BASEURL)
 })
    
 Given('user clicks on the login link', async function () {

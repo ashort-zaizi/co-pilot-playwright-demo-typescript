@@ -1,19 +1,21 @@
 import { BeforeAll, Before, AfterAll, After, Status  } from "@cucumber/cucumber"
-import { chromium, Browser, Page, BrowserContext } from "@playwright/test"
+import { Browser, BrowserContext } from "@playwright/test"
+import { invokeBrowser } from "../helper/browser/browserManager"
+import { getEnv } from "../helper/env/env"
 import { fixture } from "./pageFixture"
 
 let browser: Browser
-let page: Page
 let context: BrowserContext
 
 
 BeforeAll(async function () {
-    browser = await chromium.launch({ headless: false })
-    context = await browser.newContext()
+    getEnv();
+    browser = await invokeBrowser()
 })
 
 Before(async function () {
-    page = await browser.newPage()
+    context = await browser.newContext()
+    const page = await browser.newPage()
     fixture.page = page
 })
 
