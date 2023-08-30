@@ -1,21 +1,19 @@
-import { chromium, firefox, LaunchOptions, webkit } from "@playwright/test";
+import { LaunchOptions, chromium, firefox, webkit } from "playwright-core";
 
 const options: LaunchOptions = {
-    headless: false
+    headless: !true
 }
-
 export const invokeBrowser = () => {
-    const browserType = process.env.BROWSER
-
+    const browserType = process.env.npm_config_BROWSER || "chrome";
     switch (browserType) {
         case "chrome":
-            return chromium.launch(options)
+            return chromium.launch(options);
         case "firefox":
-            return firefox.launch(options)
+            return firefox.launch(options);
         case "webkit":
-            return webkit.launch(options)
+            return webkit.launch(options);
         default:
-            throw new Error("Browser not supported")
-        break;
+            throw new Error("Please set the proper browser!")
     }
+
 }
